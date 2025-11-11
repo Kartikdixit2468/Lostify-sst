@@ -1,0 +1,32 @@
+{
+  "name": "lostify-fullstack",
+  "version": "2.0.0",
+  "description": "Full-stack lost and found application with React and Express",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev": "node backend/index.js",
+    "build": "cd frontend && npm run build",
+    "start": "node backend/index.js"
+  },
+  "keywords": [
+    "lost-and-found",
+    "react",
+    "express",
+    "fullstack"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "express-session": "^1.18.2",
+    "framer-motion": "^12.23.24",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.10",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "react-chartjs-2": "^5.3.1",
+    "react-hot-toast": "^2.6.0",
+    "react-icons": "^5.5.0",
+    "string-similarity": "^4.0.4"
+  }
+}

@@ -1,0 +1,204 @@
+You are building Lostify, a complete full-stack Lost & Found web application that allows users to post, search, and manage lost or found items, while providing admins with full moderation and analytics control.
+
+The app should be modern, responsive, and production-ready, using React (frontend), Express.js (backend), and Replit Database for persistent storage.
+
+⚙️ Tech Stack
+
+Frontend: React + Vite + TailwindCSS
+
+Backend: Express.js (Node.js)
+
+Database: Replit Database
+
+Auth: Secure JWT-based authentication
+
+Password Hashing: bcrypt
+
+Charts: Chart.js or Recharts for analytics
+
+🧩 Core Features
+
+User Authentication
+
+Signup and Login using username, email, and password.
+
+Passwords stored as bcrypt hashes.
+
+JWT-based login sessions with auto-expiry.
+
+No hardcoded secrets — use JWT_SECRET in Replit Secrets tab.
+
+Post Lost or Found Items
+
+Form fields: title, description, category, type (Lost/Found), location, date, contactNumber, imageURL.
+
+Validate inputs and upload optional image via Replit Storage API or external URL.
+
+Save each post in Replit Database with status: active by default.
+
+Users can edit, delete, or mark posts as “Resolved.”
+
+Browse & Search
+
+Dynamic list of all active posts.
+
+Filters: type (Lost/Found), category, location.
+
+Search by title, description, or keyword.
+
+Responsive card-based grid layout.
+
+User Dashboard
+
+Each user sees their own posts under “My Posts.”
+
+Actions: edit, delete, or mark resolved.
+
+Section for “My Matches” (items automatically matched by keyword similarity).
+
+Admin Dashboard (Fully Functional)
+
+Role-based login: admin credentials stored as environment variables (ADMIN_EMAIL, ADMIN_USERNAME, ADMIN_PASSWORD).
+
+Admin JWT token includes role: 'admin'.
+
+Only admin can access /admin route or /api/admin/* APIs.
+
+Admin Features:
+
+Dashboard overview with statistics: total posts, active vs resolved, lost vs found count.
+
+Data table with all posts (sortable and filterable).
+
+Flagged posts queue (reported by users).
+
+Edit, resolve, or delete any post.
+
+Add admin notes for internal tracking.
+
+Export posts as CSV.
+
+Visual analytics using Chart.js (category distribution, posts per week).
+
+Admin API Routes:
+
+GET /api/admin/stats – returns post stats for dashboard.
+
+GET /api/admin/posts – fetch all posts (with filters).
+
+PATCH /api/admin/posts/:id – update post status or add notes.
+
+DELETE /api/admin/posts/:id – remove post.
+
+Smart Match System
+
+Compare “Lost” and “Found” posts using string similarity between titles and descriptions.
+
+Highlight likely matches in both users’ dashboards.
+
+Optionally notify users when a strong match is found.
+
+Security
+
+JWT authentication middleware for all protected routes.
+
+Role-based access control (user vs admin).
+
+bcrypt for password hashing.
+
+Input validation and sanitization for all forms.
+
+Server fails gracefully if environment variables (JWT_SECRET, admin credentials) are missing.
+
+UI & UX
+
+Clean, modern TailwindCSS interface.
+
+Light and dark mode support.
+
+Sticky navbar with routes: Home, Lost, Found, Dashboard, Admin (only for admins).
+
+Toast notifications for post creation, deletion, resolution, and errors.
+
+Responsive layout for mobile and desktop.
+
+🧱 Database Schema (Replit DB Structure)
+users:<username> = {
+  id,
+  username,
+  email,
+  passwordHash,
+  isAdmin (boolean)
+}
+
+posts:<uuid> = {
+  id,
+  userId,
+  title,
+  description,
+  category,
+  type, // Lost or Found
+  location,
+  date,
+  contactNumber,
+  imageURL,
+  status, // active, resolved, flagged
+  createdAt,
+  adminNote (optional)
+}
+
+🔒 Security Highlights
+
+All sensitive data stored in Replit Secrets.
+
+JWT secret never hardcoded.
+
+Automatic token validation on startup; expired sessions cleared.
+
+Strict admin route protection.
+
+Password hashing with bcrypt.
+
+⚡ Optional Add-Ons (Stretch Goals)
+
+Email or WhatsApp notifications when a match is found.
+
+QR code for each post (scan to view details).
+
+Reputation system (points for successful recoveries).
+
+“Report Post” feature to flag suspicious entries.
+
+Public leaderboard of verified finders.
+
+🎯 Deliverables
+
+Working full-stack app deployed on Replit.
+
+Secure authentication and admin system.
+
+Functional CRUD for posts.
+
+Search, filter, and smart match functionality.
+
+Polished responsive UI with TailwindCSS.
+
+Complete Admin Dashboard with analytics, CSV export, and moderation tools.
+
+Clean code, comments, and documentation.
+
+🧠 Instructions for Replit AI
+
+Generate backend (Express) and frontend (React) folders with proper structure.
+
+Implement JWT authentication with bcrypt and role validation.
+
+Create REST APIs for posts, users, and admin routes.
+
+Build responsive UI components for home, login, signup, dashboard, and admin pages.
+
+Connect frontend to backend via Axios.
+
+Deploy and test all endpoints and dashboards for full functionality.
+
+End goal: A polished, secure, and data-driven lost-and-found platform where users can recover items efficiently and admins can manage and moderate all activity through an advanced analytics dashboard.

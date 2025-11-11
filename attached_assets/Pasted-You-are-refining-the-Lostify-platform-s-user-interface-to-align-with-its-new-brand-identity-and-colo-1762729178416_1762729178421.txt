@@ -1,0 +1,124 @@
+You are refining the Lostify platform’s user interface to align with its new brand identity and color system.
+Implement the design, color, and layout consistency improvements listed below, fix the dark mode toggle, and ensure all UI components follow the unified style guide.
+
+🎨 Apply the Official Lostify Color Theme
+
+Primary Colors:
+
+Navy (Primary): #1E2A45
+
+Yellow (Accent): #F8C538
+
+Light Gray (Surface): #E7ECEF
+
+Charcoal (Text): #1A1A1A
+
+White (Base): #FFFFFF
+
+Green (Found): #10B981
+
+Red (Lost): #EF4444
+
+Apply globally:
+
+Backgrounds → Light gray or white in light mode, navy in dark mode.
+
+Buttons → Primary navy background with white text; hover: yellow background with navy text.
+
+Lost tag → soft red background, white text.
+
+Found tag → soft green background, white text.
+
+Navbar/footer → navy background with yellow highlights.
+
+Inputs → gray borders and subtle focus glow matching accent color.
+
+🌗 Fix Dark Mode Toggle
+
+Ensure Tailwind darkMode: 'class' is enabled.
+
+Implement a useDarkMode() hook that toggles the class dark on document.documentElement.
+
+Store user preference in localStorage.
+
+On page load, check localStorage and apply the correct theme.
+
+Add a smooth 0.3s transition for background and text color changes.
+
+🧱 Typography & Spacing
+
+Import and apply:
+
+Headings & Buttons → Manrope, 600–700 weight.
+
+Body & Labels → Inter, 400–500 weight.
+
+Consistent font sizing scale:
+
+H1: 2rem
+
+H2: 1.5rem
+
+Body: 1rem
+
+Use uniform spacing (Tailwind spacing scale 4, 8, 12, 16).
+
+🪄 Components to Update
+
+Navbar
+
+Logo on the left, dark mode toggle (moon/sun icon) on the right.
+
+Background: navy in light mode, darker navy in dark mode.
+
+Links in white/yellow contrast.
+
+Buttons
+
+.btn-primary → navy bg, white text, yellow hover.
+
+.btn-secondary → white bg, navy border/text, yellow hover border.
+
+Rounded corners, medium padding, subtle shadow.
+
+Post Cards
+
+Colored border left (red for Lost, green for Found).
+
+Background: white (light mode), navy-800 (dark mode).
+
+Text color: adaptive per mode.
+
+Add fade-in animation on render.
+
+Forms & Inputs
+
+Rounded, consistent border radius.
+
+Subtle focus ring in accent yellow.
+
+Button placement consistent on all forms.
+
+Empty States
+
+Add friendly messages (“No items found”, “Start by creating a post”) with a small illustration.
+
+Include a button to create new posts.
+
+Toasts & Feedback
+
+Use react-toastify or similar.
+
+Success → green, Error → red, Info → yellow.
+
+🧠 Functional Checks
+
+Verify dark mode toggle persistence.
+
+Ensure color theme propagates across all components and pages.
+
+Test all hover/focus states for accessibility.
+
+Make sure light and dark mode both maintain visual contrast and readability.
+
+Goal: Deliver a cohesive, branded, and responsive Lostify UI that reflects the new color palette, fixes the dark mode toggle, and maintains a modern, accessible user experience across all devices.

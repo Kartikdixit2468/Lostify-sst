@@ -1,0 +1,211 @@
+You are the Replit AI assistant helping build Lostify, a lost-and-found web application for college students.
+
+The goal is to create a fully functional, production-ready full-stack app using React (frontend), Express.js (backend), and Replit Database for data persistence.
+
+🎯 Objective
+
+Build a complete lost-and-found portal where users can post lost/found items, browse others’ posts, mark items as returned, and manage their profile — all in real-time, from a clean and responsive UI.
+
+⚙️ Tech Stack
+
+Frontend: React + Vite + TailwindCSS
+
+Backend: Express.js (Node.js)
+
+Database: Replit Database
+
+Routing: React Router DOM
+
+Auth: Simple username/password stored securely (hashed) in Replit DB
+
+Hosting: Replit built-in deployment
+
+🧩 Core Features
+
+User Authentication
+
+Sign up / login with username, password, email.
+
+Store passwords hashed in Replit Database.
+
+Session management via JWT or Replit Auth.
+
+Post Item (Lost or Found)
+
+Form with fields:
+
+title, description, category (ID card, bag, mobile, etc.),
+
+type (Lost / Found),
+
+location,
+
+date/time,
+
+contactNumber,
+
+imageURL (optional, upload to Replit storage or external link).
+
+Client-side validation before submission.
+
+Store data in Replit Database as structured objects.
+
+Browse & Search Items
+
+Public feed showing all active posts.
+
+Filters: Lost/Found, category, location.
+
+Search bar for keywords in title/description.
+
+Pagination or infinite scroll.
+
+User Dashboard / My Posts
+
+Shows user’s submitted posts (Lost & Found).
+
+Edit or delete own posts.
+
+Option to mark items as “Resolved” (item returned or found).
+
+Admin Dashboard
+
+Admin login (flag stored in DB).
+
+View all posts, filter by status, delete spam or fake entries.
+
+Display total posts, active items, resolved items.
+
+Notifications (Optional / Stretch Goal)
+
+Basic matching logic: if a “Found” post title/description matches keywords from someone’s “Lost” post → show an alert or highlight potential matches.
+
+Responsive UI & UX
+
+Mobile-first design using TailwindCSS.
+
+Simple navbar (Home, Lost, Found, My Posts, Profile).
+
+Card-based layout for posts.
+
+Loading skeletons, modals, and success/error toasts.
+
+Data Persistence
+
+Use Replit Database with clear key structure:
+
+users:<username> -> { username, email, passwordHash, isAdmin }
+posts:<id> -> { id, user, title, description, type, category, location, date, contact, imageURL, status }
+
+
+Index posts for listing and searching efficiently.
+
+Security
+
+Hash passwords using bcrypt.
+
+Verify JWT on protected routes (e.g., “My Posts”, Admin).
+
+Deployment
+
+Ensure both frontend and backend run on Replit.
+
+Configure .replit and replit.nix for full-stack support.
+
+Expose backend routes (/api/posts, /api/users, etc.) for frontend calls.
+
+🔁 Workflow / Flow of the App
+
+Landing Page
+
+Shows hero section with “Report Lost Item” / “Report Found Item” buttons.
+
+Displays recent posts preview.
+
+Signup/Login
+
+New user registers → stored in DB.
+
+Authenticated users redirected to Dashboard.
+
+Dashboard (After Login)
+
+Tabs: All Posts | My Posts | Add New
+
+“Add New” opens form modal → submits via /api/posts/create.
+
+“My Posts” lets user edit, delete, or mark resolved.
+
+Public Feed
+
+All users (even guests) can view posts and use filters/search.
+
+Clicking a post opens details page with contact info.
+
+Admin View
+
+Restricted route.
+
+View all posts, manage spam, and track platform activity metrics.
+
+Logout
+
+Clear token/session → redirect to landing page.
+
+🧱 Project Structure
+lostify/
+├── backend/
+│   ├── index.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── posts.js
+│   ├── utils/
+│   │   ├── db.js
+│   │   ├── auth.js
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── components/
+│   │   ├── pages/
+│   │   │   ├── Home.jsx
+│   │   │   ├── Login.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Admin.jsx
+│   │   ├── hooks/
+│   │   ├── context/
+│   ├── public/
+│   ├── package.json
+├── package.json
+├── .replit
+├── replit.nix
+└── README.md
+
+🧠 Instructions for Replit AI
+
+Generate backend and frontend boilerplate with above structure.
+
+Implement user auth with password hashing and Replit Database.
+
+Create REST API routes for CRUD operations on posts.
+
+Connect frontend pages with backend via Axios calls.
+
+Implement state management (Context API or simple hooks).
+
+Add Tailwind components for forms, cards, modals, and navbar.
+
+Test all workflows end-to-end (signup → post item → edit → resolve → admin view).
+
+Deploy live on Replit.
+
+✅ Deliverables:
+
+Fully working lost & found app
+
+Persistent Replit DB data
+
+Clean UI
+
+Working auth, CRUD, search, filters
+
+Admin dashboard and responsive design

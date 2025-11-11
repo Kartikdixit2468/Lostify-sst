@@ -1,0 +1,104 @@
+You are finalizing and upgrading the Lostify platform to include advanced filtering and direct contact email functionality for admin feedback.
+
+🧾 Contact Form Mailing
+
+The existing contact modal should send the submitted message directly to the admin’s email.
+
+Add backend route /api/contact:
+
+Validates required fields: name, email, and message.
+
+Uses Nodemailer with credentials stored in Replit Secrets:
+
+ADMIN_EMAIL
+
+ADMIN_APP_PASSWORD (Gmail app password or equivalent)
+
+Sends formatted email:
+
+Subject: [Lostify Feedback] <subject or "General Message"> from <name>
+Body:
+Name: <name>
+Email: <email>
+Message:
+<message>
+
+
+Responds with success or error JSON.
+
+Show toast on success (“Message sent successfully!”) and error (“Failed to send message.”).
+
+Keep styling consistent with dark/light modes.
+
+🧭 Filter System (User & Admin)
+For All Users:
+
+Add detailed filters to Browse and My Posts:
+
+Type (Lost/Found)
+
+Category (Electronics, ID Cards, Books, Accessories, Wallets, Others)
+
+Location (dropdown/search)
+
+Date Range (From–To)
+
+Sort By (Newest, Oldest, Recently Updated, Resolved)
+
+Each filter dynamically updates results (no reload) with debounce (300ms).
+
+Add “Clear Filters” button.
+
+For Admins:
+
+Extend with:
+
+Status (Active, Resolved, Flagged)
+
+User Email / Name (search)
+
+Has Image (checkbox)
+
+🎨 Design & Interaction
+
+Filter panel:
+
+Desktop: sidebar on left.
+
+Mobile: collapsible top panel via “Filter” button.
+
+Use Lostify brand palette:
+
+Light Gray #E7ECEF (light mode surface)
+
+Navy #1E2A45 (dark mode surface)
+
+Yellow #F8C538 (highlight)
+
+“Apply” → btn-primary, “Clear” → btn-secondary.
+
+Framer Motion animations on filter transitions and result updates.
+
+🧾 Lost/Found Form Validation
+
+Required fields: Title, Category, Description, Type, Location, Date (no future dates), Contact Number.
+
+Optional: Image Upload, Additional Notes.
+
+Mark required fields with red asterisk *.
+
+Inline error text for missing or invalid inputs.
+
+🧠 Quality Check
+
+Test contact form successfully sends an email to ADMIN_EMAIL.
+
+Validate all form inputs client-side and server-side.
+
+Confirm filters work dynamically, persist via URL or localStorage.
+
+Check responsive layouts and dark/light theme consistency.
+
+Ensure no personal identifiers (e.g., “Scaler student”) appear outside footer credit.
+
+Goal: Finalize Lostify as a fully operational, feedback-ready, and user-centered platform with dynamic filters, validated forms, and a direct communication channel between users and admin via email.

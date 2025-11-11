@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body {
+    @apply font-sans text-charcoal dark:text-white bg-lightGray dark:bg-navy;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-navy text-white px-6 py-2.5 rounded-lg font-heading font-semibold 
+           hover:bg-accent hover:text-navy transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-white dark:bg-navy text-navy dark:text-white border-2 border-navy dark:border-accent px-6 py-2.5 rounded-lg font-heading font-semibold 
+           hover:border-accent hover:bg-accent hover:text-navy transition-all duration-300 shadow-sm;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2.5 border border-charcoal/20 dark:border-white/20 rounded-lg 
+           focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent
+           bg-white dark:bg-navy text-charcoal dark:text-white
+           placeholder:text-charcoal/50 dark:placeholder:text-white/50
+           transition-all duration-300;
+  }
+
+  .card {
+    @apply bg-white dark:bg-navy rounded-lg shadow-md hover:shadow-xl 
+           transition-all duration-300 border border-charcoal/10 dark:border-white/10;
+  }
+
+  .text-muted {
+    @apply text-charcoal/60 dark:text-white/60;
+  }
+
+  .border-muted {
+    @apply border-charcoal/20 dark:border-white/20;
+  }
+}
+
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

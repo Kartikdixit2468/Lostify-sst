@@ -1,0 +1,229 @@
+You are completing Lostify, a full-stack Lost & Found web application that allows users to post, search, and manage lost or found items, while providing admins with full moderation and analytics.
+
+The platform must be modern, secure, and fully functional on Replit using:
+
+Frontend: React + Vite + TailwindCSS
+
+Backend: Express.js (Node.js)
+
+Database: Replit Database
+
+Auth: JWT for sessions, bcrypt for password hashing
+
+OAuth: Google login restricted to @sst.scaler.com emails
+
+🧩 Core Functionality
+
+User Authentication
+
+Email + password signup/login.
+
+Passwords hashed with bcrypt.
+
+JWT-based sessions with auto-expiry and cookie storage.
+
+Google OAuth login (only allow @sst.scaler.com domain).
+
+Unauthorized Google accounts must see a clear toast error message:
+“Only @sst.scaler.com accounts are allowed.”
+
+Admin Login
+
+Add an Admin tab on the same Sign In page.
+
+Verify credentials against Replit Secrets (ADMIN_EMAIL, ADMIN_USERNAME, ADMIN_PASSWORD).
+
+On success, issue JWT with role: 'admin' and redirect to /admin.
+
+Protect all /api/admin/* routes with role middleware.
+
+Create Lost/Found Posts
+
+Form fields: title, description, category, type (Lost/Found), location, date, contactNumber, and Add Image (file upload).
+
+Replace “Image URL” with a file upload input.
+
+On submit, upload image to backend /api/upload, validate file (jpg, png, jpeg, webp, ≤3MB), and return a stored URL.
+
+Save to DB with status “active.”
+
+Post Cards (UI updates)
+
+Replace static image area with uploaded image or gray box + icon if no image.
+
+Colored strip on left edge: red for “Lost,” green for “Found.”
+
+Show date and time formatted as DD/MM/YYYY (hh:mm A).
+
+Add Message Owner or Message Finder button at the bottom:
+
+Opens WhatsApp chat via https://wa.me/<number>?text=Hi, I’m contacting you about "<item title>" on Lostify.
+
+Validate numbers and convert to E.164 format (default +91).
+
+Responsive grid layout with shadow and hover lift.
+
+User Dashboard
+
+Tabs: My Posts, My Matches, Profile.
+
+Users can edit, delete, or mark posts as resolved.
+
+Show match suggestions using keyword similarity between Lost and Found posts.
+
+Admin Dashboard
+
+Accessed only by users with role: 'admin'.
+
+Features:
+
+Total posts, active vs resolved count, lost vs found ratio.
+
+Category distribution chart (Chart.js or Recharts).
+
+Full table of all posts (sortable, filterable, paginated).
+
+Flagged posts queue (reported by users).
+
+Admin actions: delete, mark resolved, edit status, add internal notes.
+
+Export posts as CSV.
+
+Endpoints:
+
+GET /api/admin/stats
+
+GET /api/admin/posts
+
+PATCH /api/admin/posts/:id
+
+DELETE /api/admin/posts/:id
+
+Search & Filters
+
+Search bar filters by title, description, or keywords.
+
+Filter by category, type, or location.
+
+Sticky filters on mobile for better UX.
+
+Backend Enhancements
+
+POST /api/upload – handles file uploads using multer.
+
+POST /api/posts – create post.
+
+GET /api/posts – fetch posts (with filters + pagination).
+
+PATCH /api/posts/:id – update or mark resolved.
+
+DELETE /api/posts/:id – delete post.
+
+POST /api/posts/:id/report – flag a post (moves to flagged queue after threshold).
+
+Smart Matching
+
+On post creation, run simple keyword similarity check (Lost vs Found) to suggest matches.
+
+Highlight potential matches on both dashboards.
+
+UI/UX & Responsiveness
+
+Clean, modern Tailwind styling consistent across all pages.
+
+Add empty states, skeleton loaders, and toasts for all actions.
+
+Fully responsive layout for desktop, tablet, and mobile (no horizontal scroll).
+
+Dark mode toggle.
+
+🧱 Replit Database Schema
+users:<username> = {
+  id,
+  username,
+  email,
+  passwordHash,
+  isAdmin,
+  createdAt
+}
+
+posts:<uuid> = {
+  id,
+  userId,
+  title,
+  description,
+  category,
+  type, // Lost or Found
+  location,
+  date,
+  contactNumber,
+  imageURL,
+  status, // active, resolved, flagged
+  createdAt,
+  adminNote
+}
+
+🔒 Security
+
+All secrets managed via Replit Secrets tab:
+JWT_SECRET, ADMIN_EMAIL, ADMIN_USERNAME, ADMIN_PASSWORD, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET.
+
+Auto-fail startup if any env var missing.
+
+bcrypt for hashing passwords.
+
+JWT tokens verified and auto-expire after 2h.
+
+Middleware: requireAuth, requireAdmin.
+
+Sanitized inputs and rate limits for auth/upload endpoints.
+
+🎨 Frontend Pages
+
+Home: Public feed of posts with filters, search, responsive cards.
+
+Login/Signup: Tabs for User / Admin login, Google button (only @sst.scaler.com).
+
+Dashboard: Manage posts, see matches.
+
+Admin: Full moderation dashboard with analytics, CSV export, and action buttons.
+
+PostForm: Create/Edit post with image upload.
+
+Navbar: Links for Home, Dashboard, Admin (if logged in as admin), Logout.
+
+⚡ Final Deliverables
+
+Fully working backend with all routes and validations.
+
+Secure login with JWT and Google OAuth restricted to @sst.scaler.com.
+
+Admin Dashboard with analytics and post control.
+
+Working WhatsApp integration (Message Owner/Finder button).
+
+Functional file upload.
+
+Responsive, clean, and modern UI with TailwindCSS.
+
+Light/Dark mode toggle.
+
+Deployed and persistent on Replit Database.
+
+✅ Acceptance Tests
+
+Login with a normal user → create a Lost item with image → card shows image + formatted date/time.
+
+WhatsApp button opens chat with correct message text.
+
+Login as admin (from Sign In page → Admin tab) → see stats and posts → delete or mark resolved.
+
+Google login with @sst.scaler.com → success.
+
+Google login with another domain → rejected with toast “Only @sst.scaler.com accounts allowed.”
+
+Responsive test: works seamlessly on mobile, tablet, and desktop.
+
+All routes and sessions verified, secure, and persistent.
+
+Goal: Deliver a polished, production-grade Lostify app — responsive, fully functional, secure, and connected — with real image uploads, admin control, WhatsApp messaging, and @sst.scaler.com-only Google login.

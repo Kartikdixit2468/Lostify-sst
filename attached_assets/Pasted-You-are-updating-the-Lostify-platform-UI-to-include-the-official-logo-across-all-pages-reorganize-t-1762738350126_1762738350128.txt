@@ -1,0 +1,203 @@
+You are updating the Lostify platform UI to include the official logo across all pages, reorganize the navigation bar with a profile dropdown menu, and ensure a consistent, modern layout in both user and admin views.
+
+🖼️ 1. Add Lostify Logo Across the App
+
+Goal:
+Add the official Lostify logo (from the provided image) to every relevant page and component while maintaining proper scaling and alignment.
+
+Tasks:
+
+Import and use the provided logo image:
+
+import logo from "./assets/lostify-logo.png"; // Adjust path as needed
+
+
+Add logo to:
+
+Navbar (top-left)
+
+Login and Register pages
+
+Admin panel header
+
+Footer (small version)
+
+Make the logo clickable, navigating back to the dashboard/home:
+
+<img
+  src={logo}
+  alt="Lostify Logo"
+  className="h-10 w-auto cursor-pointer"
+  onClick={() => navigate("/")}
+/>
+
+
+Ensure responsive scaling:
+
+Mobile: max height 32px
+
+Desktop: max height 48px
+
+Styling Guidelines:
+
+Use object-contain and rounded-xl for clean rendering.
+
+Add subtle hover animation using Framer Motion:
+
+whileHover={{ scale: 1.05 }}
+transition={{ duration: 0.2 }}
+
+
+Dark Mode → invert colors if needed (via filter: invert(1)).
+
+👤 2. Add Profile Icon + Dropdown (Settings + Logout)
+
+Goal:
+Add a profile icon at the top-right corner of the navbar for both user and admin roles.
+When clicked, it should open a dropdown menu containing:
+
+Profile (optional future use)
+
+Settings
+
+Logout
+
+Implementation:
+
+import { useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
+
+const [menuOpen, setMenuOpen] = useState(false);
+
+<div className="relative">
+  <FaUserCircle
+    className="text-3xl cursor-pointer text-[#F8C538]"
+    onClick={() => setMenuOpen(!menuOpen)}
+  />
+  {menuOpen && (
+    <div className="absolute right-0 mt-2 w-48 bg-[#E7ECEF] dark:bg-[#1E2A45] rounded-lg shadow-lg border border-gray-300 dark:border-gray-700">
+      <button
+        className="block w-full text-left px-4 py-2 hover:bg-[#F8C538] hover:text-[#1E2A45]"
+        onClick={() => navigate("/settings")}
+      >
+        ⚙️ Settings
+      </button>
+      <button
+        className="block w-full text-left px-4 py-2 hover:bg-[#F8C538] hover:text-[#1E2A45]"
+        onClick={handleLogout}
+      >
+        🚪 Logout
+      </button>
+    </div>
+  )}
+</div>
+
+
+Additional Notes:
+
+Use the same component in both user and admin layouts for consistency.
+
+The dropdown should close automatically when:
+
+User clicks outside it (add useEffect listener)
+
+User clicks one of the options.
+
+Logout Logic:
+
+const handleLogout = () => {
+  localStorage.clear();
+  navigate("/login");
+  toast.success("Logged out successfully!");
+};
+
+🧭 3. Update Navbar Layout (User + Admin)
+
+Goal:
+Reorganize navbar to follow modern app structure.
+
+Layout:
+
+| [Logo] | [Navigation Tabs / Links] | [Dark Mode Toggle] [Profile Icon] |
+
+
+Tasks:
+
+Remove standalone “Settings” and “Logout” buttons (moved under profile dropdown).
+
+Keep dark mode toggle as a small moon/sun icon beside profile icon.
+
+For admin, maintain “ADMIN” badge beside the logo (yellow pill).
+
+<span className="ml-2 bg-[#F8C538] text-[#1E2A45] text-xs font-semibold px-2 py-1 rounded-full">
+  ADMIN
+</span>
+
+
+Responsive Design:
+
+On smaller screens → collapse nav items into a hamburger menu.
+
+Keep profile icon visible even on mobile.
+
+🎨 4. Styling and Consistency
+
+All dropdowns, hover effects, and icons must respect dark/light mode styles.
+
+Use Lostify’s brand palette:
+
+Navy #1E2A45 for dark mode backgrounds.
+
+Yellow #F8C538 for highlights.
+
+Light gray #E7ECEF for light mode cards.
+
+Apply subtle Framer Motion transitions:
+
+Dropdown fade/slide: initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+
+🔁 5. Integration Summary
+Feature	Added/Modified	Behavior
+Logo	✅ Added	Appears in navbar, login, admin, and footer; clickable
+Profile Icon	✅ Added	Top-right dropdown with settings + logout
+Navbar Layout	✅ Updated	Clean structure, responsive, brand-aligned
+Settings	✅ Moved	Into dropdown under profile icon
+Logout	✅ Moved	Into dropdown under profile icon
+Dark Mode	✅ Retained	Positioned beside profile icon
+Admin Badge	✅ Retained	Beside logo, only for admin role
+🧠 6. Optional Enhancements
+
+Add user’s profile picture from OAuth (if available):
+
+<img src={user.picture} className="h-8 w-8 rounded-full" />
+
+
+Fallback to FaUserCircle if no image.
+
+Add hover tooltips to icons (“Toggle Theme,” “Profile,” etc.).
+
+Add small entry animation to dropdown (transition-all duration-200).
+
+✅ 7. Final Result
+
+After these changes:
+
+Lostify logo appears consistently across all pages and acts as a home shortcut.
+
+Navbar is compact, elegant, and mobile-friendly.
+
+Settings and Logout are accessible from a clean dropdown under the profile icon.
+
+All colors and transitions match Lostify’s design language.
+
+🎯 Goal
+
+Deliver a consistent, professional, and UX-optimized interface where:
+
+The Lostify logo reinforces branding.
+
+The top-right profile icon consolidates user actions.
+
+Navigation feels minimal, modern, and intuitive.
+
+Both light and dark modes remain visually balanced.
