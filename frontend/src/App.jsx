@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -17,6 +18,8 @@ import Settings from './pages/Settings';
 import Users from './pages/Users';
 import Analytics from './pages/Analytics';
 import Feedback from './pages/Feedback';
+
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -73,9 +76,10 @@ function PageTransition({ children }) {
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-lightGray dark:bg-navy transition-colors duration-300">
-        <Toaster
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <Router>
+        <div className="min-h-screen bg-lightGray dark:bg-navy transition-colors duration-300">
+          <Toaster
           position="top-right"
           toastOptions={{
             duration: 3000,
@@ -255,6 +259,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </GoogleOAuthProvider>
   );
 }
 

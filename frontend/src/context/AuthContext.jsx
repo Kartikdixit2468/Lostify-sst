@@ -76,6 +76,16 @@ export function AuthProvider({ children }) {
     return user;
   };
 
+  const googleLogin = async (credential) => {
+    const response = await axios.post('/api/auth/google', { credential });
+    const { token, user } = response.data;
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    setUser(user);
+    return user;
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -88,6 +98,7 @@ export function AuthProvider({ children }) {
     login,
     loginAdmin,
     signup,
+    googleLogin,
     logout,
     loading
   };
