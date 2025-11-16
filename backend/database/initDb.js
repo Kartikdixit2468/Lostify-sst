@@ -1,10 +1,15 @@
 const Database = require('better-sqlite3');
 const path = require('path');
 
-const dbPath = path.join(__dirname, 'lostify.db');
+const dbPath = process.env.DATABASE_PATH || 
+  (process.env.NODE_ENV === 'production' 
+    ? '/var/data/lostify.db' 
+    : path.join(__dirname, 'lostify.db'));
+
 const db = new Database(dbPath);
 
 db.pragma('journal_mode = WAL');
+db.pragma('foreign_keys = ON');
 
 const initDb = () => {
   db.exec(`
@@ -89,7 +94,7 @@ const initDb = () => {
     `).run();
   }
 
-  console.log('✅ Database initialized successfully');
+  console.log(`✅ Database initialized successfully at: ${dbPath}`);
 };
 
 module.exports = { db, initDb };

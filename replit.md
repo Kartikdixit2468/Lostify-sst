@@ -4,6 +4,18 @@
 Lostify is a modern full-stack Lost & Found web application built exclusively for Scaler School of Technology students. It facilitates posting of lost/found items, enables efficient searching with smart matching, and connects verified SST students to help reunite individuals with their belongings. The platform features role-based navigation, comprehensive settings system, smooth UI animations, and SST-branded experience.
 
 ## Recent Changes
+- **2025-11-16 (Production-Ready Migration)**: Migrated from Replit DB to SQLite and implemented Google Sign-In for deployment readiness
+  - **Database Migration**: Replaced Replit Database with SQLite (better-sqlite3) for local file-based storage compatible with Vercel/Render deployment
+  - **Google Sign-In Only**: Removed traditional username/password signup; users now authenticate exclusively via Google OAuth with @sst.scaler.com domain verification
+  - **Admin Authentication**: Admin users still use secure username/password login stored in environment variables (ADMIN_USERNAME, ADMIN_PASSWORD)
+  - **Database Schema**: Created normalized SQLite schema with users, posts, feedback, settings, and admin_settings tables with proper indexes and foreign keys
+  - **Synchronous DB Operations**: Using better-sqlite3 for synchronous database operations optimized for single-instance deployments
+  - **Removed Dependencies**: Eliminated @replit/database, passport, passport-google-oauth20, express-session in favor of direct Google OAuth implementation
+  - **Frontend Updates**: Integrated @react-oauth/google library with GoogleLogin component, removed traditional signup flow
+  - **Backend Changes**: New Google OAuth verification endpoint using google-auth-library, email domain validation server-side
+  - **Environment Variables**: Updated to require GOOGLE_CLIENT_ID (backend) and VITE_GOOGLE_CLIENT_ID (frontend) for OAuth configuration
+
+## Recent Changes (Previous)
 - **2025-11-10 (Dynamic Avatar & Premium Animations)**: Replaced generic profile icon with personalized avatar system and refined navbar animations
   - **Dynamic Avatar System**: Circular avatar displaying first letter of username/email in yellow (#F8C538) circle with navy (#1E2A45) text
   - **Google OAuth Profile Pictures**: Automatic display of Google profile pictures with 2px yellow border when available
@@ -70,7 +82,7 @@ None specified yet.
 - **Animations**: Framer Motion effects - premium navbar slide-down entrance (0.5s easeOut), nav link hover micro-interactions (scale + lift), logo/avatar hover effects, smooth dropdown transitions.
 
 ### Technical Implementations
-- **Authentication**: JWT tokens, bcrypt for password hashing, and Passport.js for Google OAuth (restricted to `@sst.scaler.com` domain).
+- **Authentication**: JWT tokens for session management, bcrypt for password hashing (admin only), and direct Google OAuth 2.0 implementation using google-auth-library (restricted to `@sst.scaler.com` domain verification). Frontend uses @react-oauth/google for seamless sign-in.
 - **File Upload**: `multer` middleware handles image uploads with a 3MB limit, replacing direct image URL input.
 - **WhatsApp Integration**: Deep-linking with pre-filled messages for contacting post owners/finders.
 - **Smart Match System**: A string similarity algorithm matches Lost/Found items based on title (40%), description (30%), category (20%), and location (10%).
@@ -82,16 +94,17 @@ None specified yet.
 
 ### System Design Choices
 - **Backend**: Express.js (Node.js) serving a REST API.
-- **Frontend**: React 18 with Vite, TailwindCSS, React Router DOM, Axios, and Chart.js.
-- **Database**: Replit Database (key-value store).
+- **Frontend**: React 18 with Vite, TailwindCSS, React Router DOM, Axios, Chart.js, and Google OAuth.
+- **Database**: SQLite (better-sqlite3) - local file-based storage in backend/database/lostify.db with WAL mode for better concurrency.
 - **Development Workflow**: Automated build and restart on Replit.
-- **Security**: Bcrypt for password hashing, JWT for session management, protected routes, and role-based authorization.
+- **Security**: Bcrypt for password hashing (admin), JWT for session management, Google OAuth for user authentication, protected routes, and role-based authorization.
+- **Deployment**: Ready for Vercel (frontend) + Render (backend with persistent disk for SQLite database).
 
 ## External Dependencies
 
-- **Database**: Replit Database
+- **Database**: SQLite (better-sqlite3)
 - **Authentication**:
-    - Google OAuth (via Passport.js)
+    - Google OAuth 2.0 (via google-auth-library for backend, @react-oauth/google for frontend)
 - **File Upload**:
     - Multer
 - **Styling**:
