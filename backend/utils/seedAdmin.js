@@ -1,5 +1,5 @@
 const { userDb } = require('../database/db');
-const { hashPassword } = require('./auth');
+const bcrypt = require('bcryptjs');
 
 function seedAdminUser() {
   const adminUsername = process.env.ADMIN_USERNAME;
@@ -17,7 +17,7 @@ function seedAdminUser() {
     
     if (!existingAdmin) {
       console.log('🔐 Seeding admin user...');
-      const passwordHash = hashPassword(adminPassword);
+      const passwordHash = bcrypt.hashSync(adminPassword, 10);
       userDb.create({
         username: adminUsername,
         email: adminEmail,
