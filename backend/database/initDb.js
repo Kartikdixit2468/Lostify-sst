@@ -42,7 +42,6 @@ const initDb = () => {
       contactInfo TEXT NOT NULL,
       type TEXT NOT NULL,
       user TEXT NOT NULL,
-      username TEXT,
       imageUrl TEXT,
       status TEXT DEFAULT 'active',
       flagged INTEGER DEFAULT 0,
