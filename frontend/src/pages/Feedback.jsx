@@ -14,7 +14,7 @@ export default function Feedback() {
 
   const fetchFeedback = async () => {
     try {
-      const response = await axios.get('/api/feedback');
+      const response = await axios.get('https://lostify-x7te.onrender.com/api/feedback');
       setFeedback(response.data);
     } catch (error) {
       toast.error('Failed to load feedback');
