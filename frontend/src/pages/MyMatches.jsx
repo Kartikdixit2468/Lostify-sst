@@ -98,7 +98,7 @@ export default function MyMatches() {
                       <p><strong>Category:</strong> {match.matchedPost.category}</p>
                       <p><strong>Location:</strong> {match.matchedPost.location}</p>
                       <p><strong>Date:</strong> {new Date(match.matchedPost.date).toLocaleDateString()}</p>
-                      <p><strong>Contact:</strong> {match.matchedPost.contactNumber}</p>
+                      <p><strong>Contact:</strong> {match.matchedPost.contactInfo}</p>
                       <p><strong>Posted by:</strong> {match.matchedPost.user}</p>
                     </div>
                   </div>
@@ -109,7 +109,7 @@ export default function MyMatches() {
                     <strong>Why this matches:</strong> This item has similar title, description, category, and location to your post.
                   </p>
                   <a
-                    href={`tel:${match.matchedPost.contactNumber}`}
+                    href={`tel:${match.matchedPost.contactInfo}`}
                     className="btn-primary inline-block"
                   >
                     Contact {match.matchedPost.user}

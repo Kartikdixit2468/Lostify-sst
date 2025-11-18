@@ -86,7 +86,7 @@ export default function MyPosts() {
                   <div className="text-sm text-charcoal/60 dark:text-white/60 space-y-1">
                     <p>📍 {post.location}</p>
                     <p>📂 {post.category}</p>
-                    <p>📞 {post.contactNumber}</p>
+                    <p>📞 {post.contactInfo}</p>
                   </div>
                 </div>
                 <div className="flex gap-2 ml-4">

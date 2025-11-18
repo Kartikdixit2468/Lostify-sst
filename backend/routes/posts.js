@@ -209,7 +209,7 @@ router.get('/export/csv', authMiddleware, adminMiddleware, async (req, res) => {
         post.category,
         `"${post.location.replace(/"/g, '""')}"`,
         post.date,
-        post.contactNumber,
+        post.contactInfo,
         post.status,
         post.user,
         post.createdAt,

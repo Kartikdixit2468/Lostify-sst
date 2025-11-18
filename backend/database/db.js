@@ -104,7 +104,7 @@ const postDb = {
 
   getByUser: (userId) => {
     return db
-      .prepare("SELECT * FROM posts WHERE user = ? ORDER BY createdAt DESC")
+      .prepare("SELECT * FROM posts WHERE username = ? ORDER BY createdAt DESC")
       .all(userId);
   },
 
