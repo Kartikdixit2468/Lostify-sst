@@ -21,6 +21,7 @@ import Feedback from './pages/Feedback';
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
 function ProtectedRoute({ children }) {
+  
   const { user, loading } = useAuth();
   
   if (loading) {
