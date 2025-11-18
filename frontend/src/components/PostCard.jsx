@@ -22,13 +22,13 @@ export default function PostCard({ post }) {
     }
     return `+91${cleaned}`;
   };
-
+  console.log(post.contactInfo)
   const handleWhatsApp = () => {
     const phone = formatPhoneNumber(post.contactInfo);
     const message = encodeURIComponent(
       `Hi, I'm contacting you about "${post.title}" on Lostify.`
     );
-    window.open(`https://wa.me/91${phone}?text=${message}`, "_blank");
+    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
   };
 
   const borderColor = post.type === "lost" ? "border-l-lost" : "border-l-found";

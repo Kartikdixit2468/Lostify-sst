@@ -50,6 +50,7 @@ export default function Dashboard() {
       
       const response = await axios.get('https://lostify-x7te.onrender.com/api/posts', { params });
       setPosts(response.data);
+      console.log(response.data)
     } catch (error) {
       toast.error('Failed to load posts');
     } finally {
