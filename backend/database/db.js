@@ -86,6 +86,7 @@ const postDb = {
       postData.contactInfo,
       postData.type,
       postData.user,
+      postData.username,
       postData.imageUrl || null,
       "active"
     );
