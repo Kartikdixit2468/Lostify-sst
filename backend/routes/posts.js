@@ -269,8 +269,9 @@ router.post('/create', authMiddleware, async (req, res) => {
       location,
       date: date || new Date().toISOString(),
       contactInfo,
+      user: req.user.id,
+      username: req.user.username,
       imageURL: imageURL || null,
-      user: req.user.id
     };
     
     const post = await createPost(postData);
