@@ -120,7 +120,7 @@ export default function PostCard({ post }) {
                 clipRule="evenodd"
               />
             </svg>
-            Posted by {post.user}
+            Posted by {post.username}
           </p>
         </div>
 
