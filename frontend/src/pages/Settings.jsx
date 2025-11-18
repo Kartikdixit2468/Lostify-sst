@@ -55,7 +55,7 @@ export default function Settings() {
   const saveAdminSettings = async () => {
     setLoading(true);
     try {
-      await axios.put('/api/settings/admin', adminSettings);
+      await axios.put('https://lostify-x7te.onrender.com/api/settings/admin', adminSettings);
       toast.success('Admin settings saved successfully!');
     } catch (error) {
       toast.error('Failed to save admin settings');

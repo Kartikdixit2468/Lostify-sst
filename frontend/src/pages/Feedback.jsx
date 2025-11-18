@@ -25,7 +25,7 @@ export default function Feedback() {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`/api/feedback/${id}`, { status });
+      await axios.put(`https://lostify-x7te.onrender.com/api/feedback/${id}`, { status });
       toast.success('Status updated successfully');
       fetchFeedback();
     } catch (error) {
@@ -37,7 +37,7 @@ export default function Feedback() {
     if (!confirm('Are you sure you want to delete this feedback?')) return;
     
     try {
-      await axios.delete(`/api/feedback/${id}`);
+      await axios.delete(`https://lostify-x7te.onrender.com/api/feedback/${id}`);
       toast.success('Feedback deleted successfully');
       fetchFeedback();
     } catch (error) {
