@@ -85,7 +85,7 @@ export default function CreatePost() {
     const { name, value } = e.target;
     
     if (name === 'date') {
-      if (value && value > maxDate) {
+      if (value && value >= maxDate) {
         setDateError('Please select a valid date — future dates are not allowed.');
         return;
       } else {
