@@ -289,7 +289,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
       return res.status(404).json({ error: 'Post not found' });
     }
     
-    if (existingPost.user !== req.user.username && !req.user.isAdmin) {
+    if (existingPost.username !== req.user.username && !req.user.isAdmin) {
       return res.status(403).json({ error: 'Not authorized to update this post' });
     }
     
@@ -308,7 +308,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
       return res.status(404).json({ error: 'Post not found' });
     }
     
-    if (existingPost.user !== req.user.username && !req.user.isAdmin) {
+    if (existingPost.username !== req.user.username && !req.user.isAdmin) {
       return res.status(403).json({ error: 'Not authorized to delete this post' });
     }
     
