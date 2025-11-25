@@ -97,164 +97,170 @@ export default function CreatePost() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-3xl font-heading font-bold text-charcoal dark:text-white mb-8">Post an Item</h1>
-      
-      {error && (
-        <div className="bg-lost/10 border border-lost text-lost px-4 py-3 rounded-lg mb-4">
-          {error}
-        </div>
-      )}
+    <div className="min-h-screen w-full">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <h1 className="text-2xl sm:text-3xl font-heading font-bold text-charcoal dark:text-white mb-6 sm:mb-8">
+          Post an Item
+        </h1>
+        
+        {error && (
+          <div className="bg-lost/10 border border-lost text-lost px-4 py-3 rounded-lg mb-4 text-sm">
+            {error}
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit} className="card p-6 space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
-            Type <span className="text-lost">*</span>
-          </label>
-          <select
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
-            className="input-field"
-            required
-          >
-            <option value="lost">Lost</option>
-            <option value="found">Found</option>
-          </select>
-        </div>
+        <form onSubmit={handleSubmit} className="card p-4 sm:p-6 space-y-4 sm:space-y-5">
+          <div>
+            <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
+              Type <span className="text-lost">*</span>
+            </label>
+            <select
+              name="type"
+              value={formData.type}
+              onChange={handleChange}
+              className="input-field"
+              required
+            >
+              <option value="lost">Lost</option>
+              <option value="found">Found</option>
+            </select>
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
-            Title <span className="text-lost">*</span>
-          </label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className="input-field"
-            required
-          />
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
+              Title <span className="text-lost">*</span>
+            </label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className="input-field"
+              required
+            />
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
-            Description <span className="text-lost">*</span>
-          </label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            rows="3"
-            className="input-field"
-            required
-          ></textarea>
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
+              Description <span className="text-lost">*</span>
+            </label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              rows="3"
+              className="input-field resize-none"
+              required
+            ></textarea>
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
-            Category <span className="text-lost">*</span>
-          </label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className="input-field"
-            required
-          >
-            <option value="">Select category</option>
-            {categories.map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
+              Category <span className="text-lost">*</span>
+            </label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="input-field"
+              required
+            >
+              <option value="">Select category</option>
+              {categories.map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
-            Location <span className="text-lost">*</span>
-          </label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            className="input-field"
-            required
-          />
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
+              Location <span className="text-lost">*</span>
+            </label>
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              className="input-field"
+              required
+            />
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
-            Date <span className="text-lost">*</span>
-          </label>
-          <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            max={maxDate}
-            className="input-field"
-            required
-          />
-          {dateError && (
-            <p className="text-lost text-sm mt-1">{dateError}</p>
-          )}
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
+              Date <span className="text-lost">*</span>
+            </label>
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              max={maxDate}
+              className="input-field"
+              required
+            />
+            {dateError && (
+              <p className="text-lost text-xs sm:text-sm mt-1">{dateError}</p>
+            )}
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
-            Contact Number <span className="text-lost">*</span>
-          </label>
-          <input
-            type="tel"
-            name="contactInfo"
-            value={formData.contactInfo}
-            onChange={handleChange}
-            className="input-field"
-            required
-            placeholder="Enter phone number (e.g., 9876543210)"
-          />
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
+              Contact Number <span className="text-lost">*</span>
+            </label>
+            <input
+              type="tel"
+              name="contactInfo"
+              value={formData.contactInfo}
+              onChange={handleChange}
+              className="input-field"
+              required
+              placeholder="Enter phone number (e.g., 9876543210)"
+            />
+          </div>
 
-        <div>
-          <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">Add Image (Optional)</label>
-          <input
-            type="file"
-            accept="image/jpeg,image/jpg,image/png,image/webp"
-            onChange={handleImageChange}
-            className="input-field"
-          />
-          <p className="text-xs text-charcoal/60 dark:text-white/60 mt-1">
-            Max size: 3MB. Supported: JPG, PNG, WEBP
-          </p>
-          {imagePreview && (
-            <div className="mt-4">
-              <img
-                src={imagePreview}
-                alt="Preview"
-                className="max-w-xs rounded-lg shadow-md"
-              />
-            </div>
-          )}
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-charcoal dark:text-white mb-2">
+              Add Image (Optional)
+            </label>
+            <input
+              type="file"
+              accept="image/jpeg,image/jpg,image/png,image/webp"
+              onChange={handleImageChange}
+              className="input-field file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-accent file:text-navy hover:file:bg-accent/90 file:cursor-pointer"
+            />
+            <p className="text-xs text-charcoal/60 dark:text-white/60 mt-1">
+              Max size: 3MB. Supported: JPG, PNG, WEBP
+            </p>
+            {imagePreview && (
+              <div className="mt-4">
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className="max-w-full sm:max-w-xs rounded-lg shadow-md"
+                />
+              </div>
+            )}
+          </div>
 
-        <div className="flex gap-4">
-          <button
-            type="submit"
-            disabled={loading || uploading}
-            className="btn-primary flex-1 disabled:opacity-50"
-          >
-            {uploading ? 'Uploading Image...' : loading ? 'Creating Post...' : 'Create Post'}
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate('/dashboard')}
-            className="btn-secondary"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
+            <button
+              type="submit"
+              disabled={loading || uploading}
+              className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed order-1"
+            >
+              {uploading ? 'Uploading Image...' : loading ? 'Creating Post...' : 'Create Post'}
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/dashboard')}
+              className="btn-secondary order-2"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

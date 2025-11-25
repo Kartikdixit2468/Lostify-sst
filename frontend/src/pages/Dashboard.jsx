@@ -77,81 +77,84 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-heading font-bold text-charcoal dark:text-white mb-8"
-      >
-        Browse Items
-      </motion.h1>
-      
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search items..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="input-field"
-        />
-      </div>
-
-      <div className="flex gap-6">
-        <aside className="hidden md:block w-64 flex-shrink-0">
-          <FilterPanel
-            filters={filters}
-            onFilterChange={handleFilterChange}
-            onClear={handleClearFilters}
-            isAdmin={user?.isAdmin}
+    <div className="min-h-screen w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-2xl sm:text-3xl font-heading font-bold text-charcoal dark:text-white mb-6 sm:mb-8"
+        >
+          Browse Items
+        </motion.h1>
+        
+        <div className="mb-6">
+          <input
+            type="text"
+            placeholder="Search items..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="input-field"
           />
-        </aside>
+        </div>
 
-        <div className="flex-1">
-          <div className="md:hidden mb-6">
+        <div className="flex flex-col md:flex-row gap-6">
+          <aside className="hidden md:block w-64 flex-shrink-0">
             <FilterPanel
               filters={filters}
               onFilterChange={handleFilterChange}
               onClear={handleClearFilters}
               isAdmin={user?.isAdmin}
             />
-          </div>
+          </aside>
 
-          {loading ? (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-accent border-t-transparent"></div>
+          <div className="flex-1 min-w-0">
+            <div className="md:hidden mb-6">
+              <FilterPanel
+                filters={filters}
+                onFilterChange={handleFilterChange}
+                onClear={handleClearFilters}
+                isAdmin={user?.isAdmin}
+              />
             </div>
-          ) : posts.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-16 card"
-            >
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-heading font-semibold text-charcoal dark:text-white mb-2">
-                No items found
-              </h3>
-              <p className="text-charcoal/60 dark:text-white/60 mb-6">
-                {search || Object.values(filters).some(v => v && v !== 'all' && v !== 'newest' && v !== false)
-                  ? 'Try adjusting your search or filters' 
-                  : 'Be the first to post an item!'}
-              </p>
-              <Link to="/create" className="btn-primary inline-block">
-                Post Your First Item
-              </Link>
-            </motion.div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="grid md:grid-cols-2 gap-6"
-            >
-              {posts.map((post) => (
-                <PostCard key={post.id} post={post} />
-              ))}
-            </motion.div>
-          )}
+
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-accent border-t-transparent"></div>
+              </div>
+            ) : posts.length === 0 ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-12 sm:py-16 card p-6 sm:p-8"
+              >
+                <div className="text-5xl sm:text-6xl mb-4">🔍</div>
+                <h3 className="text-xl sm:text-2xl font-heading font-semibold text-charcoal dark:text-white mb-2">
+                  No items found
+                </h3>
+                <p className="text-charcoal/60 dark:text-white/60 mb-6 px-4">
+                  {search || Object.values(filters).some(v => v && v !== 'all' && v !== 'newest' && v !== false)
+                    ? 'Try adjusting your search or filters' 
+                    : 'Be the first to post an item!'}
+                </p>
+                <Link to="/create" className="btn-primary inline-flex">
+                  Post Your First Item
+                </Link>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
+              >
+                {posts.map((post) => (
+                  <PostCard key={post.id} post={post} />
+                ))}
+              </motion.div>
+            )}
+          </div>
         </div>
       </div>
     </div>
   );
 }
+

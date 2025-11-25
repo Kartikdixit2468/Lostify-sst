@@ -22,26 +22,34 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-navy text-white px-6 py-2.5 rounded-lg font-heading font-semibold 
-           hover:bg-accent hover:text-navy transition-all duration-300 shadow-md hover:shadow-lg;
+    @apply bg-navy text-white px-6 py-3 rounded-lg font-heading font-semibold text-sm sm:text-base
+           hover:bg-accent hover:text-navy transition-all duration-300 shadow-md hover:shadow-lg
+           w-full sm:w-auto min-h-[44px] flex items-center justify-center;
   }
 
   .btn-secondary {
-    @apply bg-white dark:bg-navy text-navy dark:text-white border-2 border-navy dark:border-accent px-6 py-2.5 rounded-lg font-heading font-semibold 
-           hover:border-accent hover:bg-accent hover:text-navy transition-all duration-300 shadow-sm;
+    @apply bg-white dark:bg-navy text-navy dark:text-white border-2 border-navy dark:border-accent px-6 py-3 rounded-lg font-heading font-semibold text-sm sm:text-base
+           hover:border-accent hover:bg-accent hover:text-navy transition-all duration-300 shadow-sm
+           w-full sm:w-auto min-h-[44px] flex items-center justify-center;
+  }
+
+  .btn-action {
+    @apply px-4 py-3 rounded-lg font-heading font-semibold text-xs sm:text-sm
+           transition-all duration-300 shadow-md hover:shadow-lg
+           w-full sm:w-auto min-h-[44px] flex items-center justify-center whitespace-nowrap;
   }
 
   .input-field {
-    @apply w-full px-4 py-2.5 border border-charcoal/20 dark:border-white/20 rounded-lg 
+    @apply w-full px-4 py-3 border border-charcoal/20 dark:border-white/20 rounded-lg text-sm sm:text-base
            focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent
            bg-white dark:bg-navy text-charcoal dark:text-white
            placeholder:text-charcoal/50 dark:placeholder:text-white/50
-           transition-all duration-300;
+           transition-all duration-300 min-h-[44px];
   }
 
   .card {
-    @apply bg-white dark:bg-navy rounded-lg shadow-md hover:shadow-xl 
-           transition-all duration-300 border border-charcoal/10 dark:border-white/10;
+    @apply bg-white dark:bg-navy rounded-xl shadow-md hover:shadow-xl 
+           transition-all duration-300 border border-charcoal/10 dark:border-white/10 w-full;
   }
 
   .text-muted {

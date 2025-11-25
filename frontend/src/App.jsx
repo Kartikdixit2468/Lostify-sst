@@ -5,6 +5,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -77,7 +78,8 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <Router>
-        <div className="min-h-screen bg-lightGray dark:bg-navy transition-colors duration-300">
+        <ScrollToTop />
+        <div className="min-h-screen bg-lightGray dark:bg-navy transition-colors duration-300 flex flex-col">
           <Toaster
           position="top-right"
           toastOptions={{
@@ -247,9 +249,9 @@ function App() {
             />
           </Routes>
         </AnimatePresence>
-        <Footer />
-      </div>
-    </Router>
+          <Footer />
+        </div>
+      </Router>
     </GoogleOAuthProvider>
   );
 }
