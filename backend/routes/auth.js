@@ -36,9 +36,7 @@ router.post('/google/getall', async (req, res) => {
 });
 
 router.post('/google', async (req, res) => {
-  try {
-    // console.log('Google credential:', credential.type);
-    
+  try {    
     const { credential } = req.body;
     if (!credential) {
       return res.status(400).json({ error: 'Google credential is required' });
