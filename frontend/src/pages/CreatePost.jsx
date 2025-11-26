@@ -22,8 +22,11 @@ export default function CreatePost() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [dateError, setDateError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const navigate = useNavigate();
-  const maxDate = new Date().toLocaleDateString('en-CA');
+  
+  // Get today's date in YYYY-MM-DD format for max attribute (includes today)
+  const maxDate = new Date().toISOString().split('T')[0];
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -50,6 +53,29 @@ export default function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate date before submission
+    if (formData.date) {
+      const selected = new Date(formData.date);
+      selected.setHours(0, 0, 0, 0);
+      
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      if (selected > today) {
+        setDateError('Please select a valid date — future dates are not allowed.');
+        toast.error('Please select a valid date (today or earlier)');
+        return;
+      }
+    }
+    
+    // Validate phone number before submission
+    if (formData.contactInfo.length !== 10) {
+      setPhoneError('Phone number must be exactly 10 digits.');
+      toast.error('Please enter a valid 10-digit phone number');
+      return;
+    }
+    
     setLoading(true);
     setError('');
 
@@ -85,12 +111,39 @@ export default function CreatePost() {
     const { name, value } = e.target;
     
     if (name === 'date') {
-      if (value && value >= maxDate) {
-        setDateError('Please select a valid date — future dates are not allowed.');
-        return;
+      if (value) {
+        // Convert selected date to Date object at midnight
+        const selected = new Date(value);
+        selected.setHours(0, 0, 0, 0);
+        
+        // Get today's date at midnight
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        // Only block future dates (today is valid)
+        if (selected > today) {
+          setDateError('Please select a valid date — future dates are not allowed.');
+        } else {
+          setDateError('');
+        }
       } else {
         setDateError('');
       }
+    }
+    
+    if (name === 'contactInfo') {
+      const digitsOnly = value.replace(/\D/g, '');
+      if (digitsOnly.length <= 10) {
+        setFormData({ ...formData, [name]: digitsOnly });
+        if (digitsOnly.length === 10) {
+          setPhoneError('');
+        } else if (digitsOnly.length > 0) {
+          setPhoneError('Phone number must be exactly 10 digits.');
+        } else {
+          setPhoneError('');
+        }
+      }
+      return;
     }
     
     setFormData({ ...formData, [name]: value });
@@ -215,8 +268,12 @@ export default function CreatePost() {
               onChange={handleChange}
               className="input-field"
               required
-              placeholder="Enter phone number (e.g., 9876543210)"
+              placeholder="Enter 10-digit phone number"
+              maxLength="10"
             />
+            {phoneError && (
+              <p className="text-lost text-xs sm:text-sm mt-1">{phoneError}</p>
+            )}
           </div>
 
           <div>
