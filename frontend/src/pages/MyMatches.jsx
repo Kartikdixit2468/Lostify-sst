@@ -114,7 +114,7 @@ export default function MyMatches() {
                         <p className="break-words"><strong>Location:</strong> {match.matchedPost.location}</p>
                         <p><strong>Date:</strong> {new Date(match.matchedPost.date).toLocaleDateString()}</p>
                         <p className="break-words"><strong>Contact:</strong> {match.matchedPost.contactInfo}</p>
-                        <p className="break-words"><strong>Posted by:</strong> {match.matchedPost.username.split('.')[0]}</p>
+                        <p className="break-words"><strong>Posted by:</strong> {match.matchedPost.username.split('.')[0].replace(/^./, c => c.toUpperCase())}</p>
                       </div>
                     </div>
                   </div>
@@ -127,7 +127,7 @@ export default function MyMatches() {
                       href={`tel:${match.matchedPost.contactInfo}`}
                       className="btn-primary inline-flex"
                     >
-                      Contact {match.matchedPost.username.split('.')[0]}
+                      Contact {match.matchedPost.username.split('.')[0].replace(/^./, c => c.toUpperCase())}
                     </a>
                   </div>
                 </div>

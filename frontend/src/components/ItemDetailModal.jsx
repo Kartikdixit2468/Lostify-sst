@@ -285,7 +285,7 @@ export default function ItemDetailModal({ post, isOpen, onClose }) {
                   <div>
                     <p className="text-xs text-charcoal/60 dark:text-white/60">Posted By</p>
                     <p className="text-sm font-semibold text-charcoal dark:text-white">
-                      {post.username?.split('.')[0] || 'Unknown User'}
+                      {post.username?.split('.')[0].replace(/^./, c => c.toUpperCase()) || 'Unknown User'}
                     </p>
                   </div>
                 </div>
