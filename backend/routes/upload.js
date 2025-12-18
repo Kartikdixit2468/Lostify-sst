@@ -51,7 +51,8 @@ router.post('/', upload.single('image'), async (req, res) => {
 
     const gh = await uploadToGithub(filename, base64);
 
-    const rawUrl = gh.content.download_url;
+    // const rawUrl = gh.content.download_url;
+    const rawUrl = `https://raw.githubusercontent.com/${process.env.GITHUB_OWNER}/${process.env.GITHUB_REPO}/main/${filename}`;
     console.log("File uploaded to GitHub: ", rawUrl);
 
     res.json({ imageUrl: rawUrl });
