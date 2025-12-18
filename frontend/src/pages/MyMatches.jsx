@@ -6,6 +6,23 @@ export default function MyMatches() {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const formatPhoneNumber = (number) => {
+    if (!number) return "";
+    const cleaned = number.replace(/\D/g, "");
+    if (cleaned.startsWith("91")) {
+      return `+${cleaned}`;
+    }
+    return `+91${cleaned}`;
+  };
+
+  const handleWhatsApp = (contactInfo, title) => {
+    const phone = formatPhoneNumber(contactInfo);
+    const message = encodeURIComponent(
+      `Hi, I'm contacting you about "${title}" on Lostify.`
+    );
+    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+  };
+
   useEffect(() => {
     fetchMatches();
   }, []);
@@ -53,7 +70,7 @@ export default function MyMatches() {
           </div>
         ) : (
           <div className="space-y-4 sm:space-y-6 w-full">
-            {matches.map((match, index) => (
+            {matches.map((match, index) => 
               <div key={index} className="card overflow-hidden fade-in">
                 <div className="bg-gradient-to-r from-navy to-accent px-4 sm:px-6 py-3">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
@@ -113,7 +130,6 @@ export default function MyMatches() {
                         <p className="break-words"><strong>Category:</strong> {match.matchedPost.category}</p>
                         <p className="break-words"><strong>Location:</strong> {match.matchedPost.location}</p>
                         <p><strong>Date:</strong> {new Date(match.matchedPost.date).toLocaleDateString()}</p>
-                        <p className="break-words"><strong>Contact:</strong> {match.matchedPost.contactInfo}</p>
                         <p className="break-words"><strong>Posted by:</strong> {match.matchedPost.username.split('.')[0].replace(/^./, c => c.toUpperCase())}</p>
                       </div>
                     </div>
@@ -123,16 +139,16 @@ export default function MyMatches() {
                     <p className="text-xs sm:text-sm text-charcoal/70 dark:text-white/80 mb-3">
                       <strong>Why this matches:</strong> This item has similar title, description, category, and location to your post.
                     </p>
-                    <a
-                      href={`tel:${match.matchedPost.contactInfo}`}
+                    <button
+                      onClick={() => handleWhatsApp(match.matchedPost.contactInfo, match.matchedPost.title)}
                       className="btn-primary inline-flex"
                     >
-                      Contact {match.matchedPost.username.split('.')[0].replace(/^./, c => c.toUpperCase())}
-                    </a>
+                      Contact via WhatsApp
+                    </button>
                   </div>
                 </div>
               </div>
-            ))}
+            )}
           </div>
         )}
       </div>
