@@ -33,7 +33,7 @@ export default function Home() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/posts/stats/public');
+        const response = await axios.get('https://lostify-sst.onrender.com/api/posts/stats/public');
         setStats(response.data);
         setLoadingStats(false);
       } catch (error) {

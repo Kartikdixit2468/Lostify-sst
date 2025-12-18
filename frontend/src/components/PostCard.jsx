@@ -46,7 +46,7 @@ export default function PostCard({ post }) {
     );
   };
 
-  console.log(post.username);
+  // console.log(post.username);
   const handleWhatsApp = (e) => {
     e.stopPropagation();
     const phone = formatPhoneNumber(post.contactInfo);
